@@ -226,7 +226,7 @@ CHARS.mai = {
   title: 'Bộ Trưởng Nông Nghiệp & Môi Trường',
   color: '#2ecc71',
   svg: `
-    <img src="assets/mai_green.png" crossorigin="anonymous" onload="removeBg(this)" style="width: 280px; height: auto; object-fit: cover; display: block; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); opacity: 0; transition: opacity 0.3s;" />
+    <img src="assets/mai_blue_green.png" crossorigin="anonymous" onload="removeBg(this)" style="width: 280px; height: auto; object-fit: cover; display: block; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); opacity: 0; transition: opacity 0.3s;" />
   `
 };
 
