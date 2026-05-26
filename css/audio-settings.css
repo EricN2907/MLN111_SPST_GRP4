@@ -1,0 +1,205 @@
+/* ═══════════════════════════════════════════════════════
+   AUDIO SETTINGS STYLES — Ghế Quyền Lực
+   ═══════════════════════════════════════════════════════ */
+
+/* Settings Modal container */
+#audio-settings-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100; /* Above crisis-reveal */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease;
+}
+
+.settings-card {
+  background: var(--panel-solid);
+  border: 1px solid var(--gold-dim);
+  max-width: 460px;
+  width: 90%;
+  padding: 1.8rem 2rem;
+  animation: cardRise 0.5s var(--ease-spring);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg), 0 0 50px rgba(201, 150, 26, 0.08);
+}
+
+.settings-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.settings-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--gold2);
+  margin-top: 0;
+  margin-bottom: 1.4rem;
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.settings-group {
+  margin-bottom: 1.2rem;
+}
+
+.settings-group label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--cream2);
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+  letter-spacing: 0.08em;
+}
+
+/* Slider Controls */
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.slider-container input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--ink3);
+  height: 6px;
+  border-radius: var(--radius-pill);
+  outline: none;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold2);
+  border: 1px solid var(--gold);
+  cursor: pointer;
+  transition: transform var(--dur-fast), background var(--dur-fast);
+  box-shadow: 0 0 8px var(--gold-glow);
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: var(--gold3);
+}
+
+.slider-container span {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--gold2);
+  min-width: 38px;
+  text-align: right;
+}
+
+/* Dropdown styling */
+.settings-select {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  background: var(--ink3);
+  border: 1px solid var(--glass-border);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--dur-fast);
+}
+
+.settings-select:focus {
+  border-color: var(--gold);
+}
+
+.settings-select option {
+  background: var(--ink2);
+  color: var(--cream);
+}
+
+/* Sound Test Section */
+.sound-test-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.btn-test {
+  padding: 0.35rem 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--cream2);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--dur-fast);
+  text-transform: uppercase;
+}
+
+.btn-test:hover {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold2);
+}
+
+/* Visualizer container */
+.visualizer-wrap {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem;
+  margin: 1.2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#audio-visualizer {
+  width: 100%;
+  height: 48px;
+  display: block;
+}
+
+/* Audio Setting Float Buttons */
+.audio-float {
+  background: rgba(201, 150, 26, 0.08) !important;
+  border: 1px solid var(--gold-dim) !important;
+  color: var(--gold2) !important;
+  transition: all var(--dur-fast) !important;
+  text-shadow: 0 0 5px rgba(201, 150, 26, 0.2);
+}
+
+.audio-float:hover {
+  background: var(--gold-dim) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 12px var(--gold-glow);
+}
+
+#audio-toggle {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+}
+
+#audio-toggle.active {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold2);
+}
