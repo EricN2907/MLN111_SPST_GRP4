@@ -56,94 +56,24 @@ SCENE_RENDERERS.office = () => `
 `;
 
 SCENE_RENDERERS.factory = () => `
-  <svg class="anime-scene scene-factory" width="100%" height="100%" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="factoryDusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a33148"/><stop offset="48%" stop-color="#6e3d60"/><stop offset="100%" stop-color="#1d1d2c"/></linearGradient>
-      <linearGradient id="factorySteel" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9aa4a6"/><stop offset="100%" stop-color="#4b535b"/></linearGradient>
-      <radialGradient id="duskGlow" cx="70%" cy="18%" r="52%"><stop offset="0%" stop-color="#ffb15e" stop-opacity="0.35"/><stop offset="100%" stop-color="#ffb15e" stop-opacity="0"/></radialGradient>
-    </defs>
-    <rect width="900" height="620" fill="url(#factoryDusk)"/>
-    <rect width="900" height="320" fill="url(#duskGlow)"/>
-    ${speedClouds(7, 'rgba(255,155,115,0.22)')}
-    ${[30,145,266,590,715,835].map((x, i) => `<rect x="${x}" y="${190 - i % 2 * 35}" width="${92 + i % 3 * 34}" height="${230 + i % 2 * 50}" fill="#30313b" stroke="#161722" stroke-width="3"/>${animeWindowGrid(x+12, 220 - i % 2 * 35, 62, 102, 3, 4, 'rgba(255,210,108,0.2)')}`).join('')}
-    <rect x="642" y="88" width="32" height="248" fill="#454b55" stroke="#171922" stroke-width="4"/>
-    <rect x="706" y="118" width="26" height="218" fill="#3b414c" stroke="#171922" stroke-width="4"/>
-    <ellipse class="scene-anim-slow" cx="658" cy="84" rx="70" ry="22" fill="rgba(220,220,230,0.13)"/>
-    <ellipse class="scene-anim-slow" cx="720" cy="113" rx="58" ry="18" fill="rgba(220,220,230,0.1)"/>
-    <path d="M0,438 C230,405 662,405 900,438 V620 H0 Z" fill="#23202a"/>
-    <rect x="84" y="356" width="230" height="118" fill="#6b665d" stroke="#272425" stroke-width="4"/>
-    <rect x="565" y="344" width="245" height="126" fill="#69615a" stroke="#272425" stroke-width="4"/>
-    <path d="M62,330 C220,290 404,292 548,326 L540,356 C390,328 228,330 72,366 Z" fill="url(#factorySteel)" stroke="#202730" stroke-width="4"/>
-    <path d="M78,354 L530,344" stroke="#2a3039" stroke-width="8" stroke-linecap="round"/>
-    ${[100,170,240,310,380,450,520].map((x) => `<path d="M${x},348 L${x+44},310" stroke="#2b313a" stroke-width="4"/><circle cx="${x+42}" cy="311" r="5" fill="#d3d0bd" opacity="0.55"/>`).join('')}
-    <path d="M210,488 C340,454 520,456 676,488" fill="none" stroke="#f0c35a" stroke-opacity="0.26" stroke-width="8"/>
-    <path d="M205,502 C345,470 520,473 684,503" fill="none" stroke="#11141d" stroke-width="7"/>
-    ${[104,160,216,620,680,740].map((x) => `<rect x="${x}" y="382" width="38" height="50" rx="4" fill="#f0c35a" opacity="0.28" stroke="#201b1b" stroke-width="2"/>`).join('')}
-    <path d="M0,515 C160,492 260,526 420,502 C585,478 690,515 900,492 V620 H0 Z" fill="#2f251d" opacity="0.9"/>
-  </svg>`;
+  <img src="assets/factory.png" style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0.85;" />
+`;
 
 SCENE_RENDERERS.protest = () => `
-  <svg class="anime-scene scene-protest" width="100%" height="100%" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="protestSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9b1f3b"/><stop offset="52%" stop-color="#3f1d3a"/><stop offset="100%" stop-color="#120c18"/></linearGradient>
-      <radialGradient id="fireGlow" cx="48%" cy="45%" r="55%"><stop offset="0%" stop-color="#ff8d3d" stop-opacity="0.4"/><stop offset="100%" stop-color="#ff8d3d" stop-opacity="0"/></radialGradient>
-    </defs>
-    <rect width="900" height="620" fill="url(#protestSky)"/>
-    <rect width="900" height="460" fill="url(#fireGlow)" class="scene-fire"/>
-    ${speedClouds(8, 'rgba(255,130,90,0.22)')}
-    ${[0,132,286,640,770].map((x, i) => `<rect x="${x}" y="${74 + (i % 2) * 42}" width="${128 + i % 3 * 34}" height="${340 - i % 2 * 24}" fill="#191621" stroke="#0b0a10" stroke-width="3"/>${animeWindowGrid(x+15, 116+(i%2)*42, 78, 160, 3, 5, 'rgba(255,178,90,0.13)')}`).join('')}
-    <path d="M318,232 C406,197 498,197 586,232 L565,284 C489,262 417,262 342,284 Z" fill="#847e74" stroke="#2d2d32" stroke-width="5"/>
-    ${chain([[340,268,-20],[388,250,-10],[438,245,0],[488,250,8],[536,267,20]], 0.76)}
-    ${[[142,382,104,'#ff5555'],[405,366,112,'#5aa8ff'],[667,356,120,'#ffad42']].map(([x,y,w,c]) => `<rect x="${x}" y="${y}" width="7" height="136" fill="#d6aa55"/><rect x="${x-48}" y="${y-15}" width="${w}" height="42" rx="5" fill="${c}" opacity="0.34" stroke="${c}" stroke-width="3"/>`).join('')}
-    ${crowd(39)}
-    <path d="M0,545 Q180,510 355,534 T700,520 T900,535 V620 H0 Z" fill="#111019"/>
-  </svg>`;
+  <img src="assets/protest.png" style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0.85;" />
+`;
 
 SCENE_RENDERERS.village = () => `
-  <svg class="anime-scene scene-village" width="100%" height="100%" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="villageSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#73bdff"/><stop offset="58%" stop-color="#c8ecff"/><stop offset="100%" stop-color="#65a962"/></linearGradient>
-      <linearGradient id="field" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8ee06e"/><stop offset="100%" stop-color="#2f8f4d"/></linearGradient>
-    </defs>
-    <rect width="900" height="620" fill="url(#villageSky)"/>
-    <circle cx="704" cy="90" r="54" fill="#ffe48b" opacity="0.92"/>
-    ${speedClouds(5, 'rgba(255,255,255,0.45)')}
-    <polygon points="0,322 205,106 430,238 650,82 900,228 900,352" fill="#4c915a" stroke="#27623c" stroke-width="4"/>
-    <polygon points="0,350 150,190 390,280 615,145 900,270 900,370" fill="#66b066" stroke="#347345" stroke-width="3"/>
-    ${[397,435,475].map((y, i) => `<path d="M0,${y} Q210,${y-34} 450,${y-12} Q680,${y+10} 900,${y-22} V${y+42} Q675,${y+68} 450,${y+46} Q220,${y+26} 0,${y+56} Z" fill="url(#field)" opacity="${0.76 - i * 0.08}" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>`).join('')}
-    ${[[112,304],[735,282],[182,332]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="56" fill="#319957" stroke="#1e623d" stroke-width="4"/><circle cx="${x+38}" cy="${y-12}" r="42" fill="#41b766"/><rect x="${x-5}" y="${y+42}" width="10" height="78" fill="#69422b"/>`).join('')}
-    <rect x="360" y="326" width="178" height="112" rx="4" fill="#7a4f30" stroke="#3a2319" stroke-width="4"/>
-    <polygon points="334,326 564,326 449,246" fill="#c45a3f" stroke="#5a231d" stroke-width="4"/>
-  </svg>`;
+  <img src="assets/village.png" style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0.85;" />
+`;
 
 SCENE_RENDERERS.parliament = () => `
-  <svg class="anime-scene scene-parliament" width="100%" height="100%" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="hall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2d365d"/><stop offset="100%" stop-color="#121424"/></linearGradient></defs>
-    <rect width="900" height="620" fill="url(#hall)"/>
-    <ellipse cx="450" cy="28" rx="365" ry="98" fill="none" stroke="#e8c04a" stroke-opacity="0.25" stroke-width="4"/>
-    <ellipse cx="450" cy="32" rx="238" ry="62" fill="none" stroke="#e8c04a" stroke-opacity="0.18" stroke-width="3"/>
-    ${columns()}
-    <circle cx="450" cy="92" r="42" fill="#e8c04a" opacity="0.14" stroke="#ffe48b" stroke-opacity="0.28" stroke-width="3"/>
-    ${Array.from({ length: 16 }, (_, i) => {
-      const a = i * Math.PI * 2 / 16;
-      return `<line x1="450" y1="92" x2="${450 + 46 * Math.cos(a)}" y2="${92 + 46 * Math.sin(a)}" stroke="#ffe48b" stroke-opacity="0.2"/>`;
-    }).join('')}
-    ${Array.from({ length: 7 }, (_, i) => `<path d="M${112+i*19},${382+i*24} Q450,${356+i*24} ${788-i*19},${382+i*24} L${810-i*19},${405+i*24} Q450,${382+i*24} ${90+i*19},${405+i*24} Z" fill="#1b2442" stroke="#e8c04a" stroke-opacity="0.08"/>`).join('')}
-    <rect x="380" y="342" width="140" height="72" rx="7" fill="#80522d" stroke="#e8c04a" stroke-opacity="0.26" stroke-width="2"/>
-  </svg>`;
+  <img src="assets/parliament.png" style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0.85;" />
+`;
 
 SCENE_RENDERERS.hospital = () => `
-  <svg class="anime-scene scene-hospital" width="100%" height="100%" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="hospitalSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#89d7ff"/><stop offset="100%" stop-color="#d7f8ff"/></linearGradient></defs>
-    <rect width="900" height="620" fill="url(#hospitalSky)"/>
-    <rect x="86" y="98" width="728" height="380" rx="14" fill="#f7fbff" opacity="0.42" stroke="#ffffff" stroke-width="4"/>
-    ${[155,275,395,515,635].map((x) => `<rect x="${x}" y="148" width="74" height="62" rx="6" fill="#6ecbff" opacity="0.32" stroke="#ffffff" stroke-opacity="0.34"/>`).join('')}
-    <rect x="382" y="246" width="136" height="162" rx="8" fill="#2a4a6f" opacity="0.45" stroke="#ffffff" stroke-opacity="0.24"/>
-    <path class="scene-warning" d="M450,286 L450,362 M412,324 L488,324" stroke="#ff5964" stroke-width="17" stroke-linecap="round"/>
-    <rect x="140" y="438" width="240" height="34" rx="9" fill="#dff7ff" opacity="0.4"/>
-    <rect x="520" y="438" width="240" height="34" rx="9" fill="#dff7ff" opacity="0.4"/>
-    <path d="M0,560 Q210,525 450,548 T900,540 V620 H0 Z" fill="#b9e7f2" opacity="0.55"/>
-  </svg>`;
+  <img src="assets/hospital.png" style="width: 100vw; height: 100vh; object-fit: cover; opacity: 0.85;" />
+`;
 
 SCENE_RENDERERS.cyber = () => `
   <svg class="anime-scene scene-cyber" width="100%" height="100%" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">

@@ -143,9 +143,12 @@ const UI = (() => {
         <div class="crisis-title">${card.title}</div>
         <div class="crisis-desc">${card.desc}</div>
         <button class="btn-pres" id="start-report">Nghe báo cáo</button>
-      </div>
     `;
     $('start-report').addEventListener('click', onStartReport);
+    
+    // Play crisis sound
+    GameAudio.play('crisis');
+    
     show('crisis-reveal');
   }
 
@@ -218,7 +221,11 @@ const UI = (() => {
       </button>
     `).join('');
     panel.querySelectorAll('.opt-card').forEach((button) => {
-      button.addEventListener('click', () => onSelect(Number(button.dataset.optionIndex)));
+      button.addEventListener('mouseenter', () => GameAudio.play('hover'));
+      button.addEventListener('click', () => {
+        GameAudio.play('click');
+        onSelect(Number(button.dataset.optionIndex));
+      });
     });
     $('dialogue-text').textContent = 'Thưa Thủ tướng, đây là các phương án chính sách:';
     $('dialogue-box').classList.add('options-mode');

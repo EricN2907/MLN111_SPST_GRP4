@@ -57,6 +57,17 @@ const GameAudio = (() => {
       return;
     }
 
+    if (type === 'hover') {
+      tone(500, 0.04, 'sine', gain, 0.015);
+      return;
+    }
+
+    if (type === 'crisis') {
+      tone(110, 0.4, 'square', gain, 0.15);
+      setTimeout(() => tone(70, 0.9, 'sawtooth', gain, 0.2), 80);
+      return;
+    }
+
     const freq = type === 'type' ? 620 : type === 'select' ? 280 : 430;
     tone(freq, type === 'type' ? 0.025 : 0.08, 'sine', gain, type === 'type' ? 0.018 : 0.045);
   }

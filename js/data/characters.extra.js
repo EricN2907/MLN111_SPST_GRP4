@@ -203,56 +203,38 @@ CHARS.lan = {
   `
 };
 
-CHARS.cuong = vnAdvisor({
-  id: 'cuongVN',
+CHARS.cuong = {
   name: 'Thiếu Tướng Phạm Đức Cường',
   title: 'Cố Vấn An Ninh Quốc Gia',
   color: '#4f6d36',
-  accent: '#99d46c',
-  hair: HAIR.general,
-  skin: ['#edc19a', '#c78455'],
-  outfit: ['#5e7d42', '#263b20'],
-  eye: '#304c23',
-  expression: 'firm',
-  accessory: capAndMedals()
-});
+  svg: `
+    <img src="assets/cuong_green.png" crossorigin="anonymous" onload="removeBg(this)" style="width: 280px; height: auto; object-fit: cover; display: block; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); opacity: 0; transition: opacity 0.3s;" />
+  `
+};
 
-CHARS.huy = vnAdvisor({
-  id: 'huyVN',
+CHARS.huy = {
   name: 'Lê Quang Huy',
   title: 'Thư Ký Báo Chí',
   color: '#2980d9',
-  accent: '#62c7ff',
-  hair: HAIR.press,
-  outfit: ['#3487d8', '#173966'],
-  eye: '#145c8c',
-  expression: 'smile',
-  prop: phoneProp()
-});
+  svg: `
+    <img src="assets/huy_green.png" crossorigin="anonymous" onload="removeBg(this)" style="width: 280px; height: auto; object-fit: cover; display: block; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); opacity: 0; transition: opacity 0.3s;" />
+  `
+};
 
-CHARS.mai = vnAdvisor({
-  id: 'maiVN',
+CHARS.mai = {
   name: 'Đỗ Mai Anh',
   title: 'Bộ Trưởng Nông Nghiệp & Môi Trường',
   color: '#2ecc71',
-  accent: '#7df2a4',
-  hair: HAIR.environment,
-  outfit: ['#2f815f', '#143d30'],
-  eye: '#1d684b',
-  expression: 'calm',
-  accessory: leafPin()
-});
+  svg: `
+    <img src="assets/mai_green.png" crossorigin="anonymous" onload="removeBg(this)" style="width: 280px; height: auto; object-fit: cover; display: block; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); opacity: 0; transition: opacity 0.3s;" />
+  `
+};
 
-CHARS.son = vnAdvisor({
-  id: 'sonVN',
+CHARS.son = {
   name: 'A Sơ Sơn',
   title: 'Đặc Phái Viên Vùng Dân Tộc',
   color: '#9b59b6',
-  accent: '#d99bff',
-  hair: HAIR.mountain,
-  skin: ['#e2ab7c', '#b8754c'],
-  outfit: ['#704992', '#301b4d'],
-  eye: '#4f2a68',
-  expression: 'firm',
-  accessory: mountainBand()
-});
+  svg: `
+    <img src="assets/son_green.png" crossorigin="anonymous" onload="removeBg(this)" style="width: 280px; height: auto; object-fit: cover; display: block; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); opacity: 0; transition: opacity 0.3s;" />
+  `
+};
