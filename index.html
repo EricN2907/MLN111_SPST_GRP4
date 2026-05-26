@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghế Quyền Lực - Policy Simulation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/endscreen.css">
+  <link rel="stylesheet" href="css/polish.css">
+</head>
+<body>
+  <div id="bg" class="bg-office" aria-hidden="true"></div>
+  <div id="scene-detail" aria-hidden="true"></div>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <section id="title-screen" aria-labelledby="game-title">
+    <div class="title-seal title-animate" aria-hidden="true">
+      <div class="title-seal-ring"></div>
+      <svg width="94" height="94" viewBox="0 0 94 94" role="img" aria-label="Quốc huy cách điệu">
+        <defs>
+          <radialGradient id="sealGlow" cx="50%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#f0d878"/>
+            <stop offset="100%" stop-color="#8e6510"/>
+          </radialGradient>
+        </defs>
+        <circle cx="47" cy="47" r="40" fill="none" stroke="#c9961a" stroke-width="1.2"/>
+        <polygon points="47,9 54,35 82,35 59,51 68,78 47,61 26,78 35,51 12,35 40,35" fill="none" stroke="url(#sealGlow)" stroke-width="1.6"/>
+        <circle cx="47" cy="47" r="19" fill="rgba(201,150,26,0.08)" stroke="rgba(201,150,26,0.35)" stroke-width="1"/>
+        <text x="47" y="52" text-anchor="middle" fill="#e8c04a" font-size="14" font-family="Playfair Display,serif" font-weight="900">TT</text>
+      </svg>
+    </div>
+    <h1 id="game-title" class="title-main title-animate title-animate-delay-1">Ghế Quyền Lực</h1>
+    <div class="title-sub title-animate title-animate-delay-2">Policy Simulation - 4 năm nhiệm kỳ</div>
+    <div class="title-divider title-animate title-animate-delay-3"></div>
+    <p class="title-desc title-animate title-animate-delay-4">
+      Bạn là Thủ tướng của một quốc gia đang phát triển. Mỗi quý, một khủng hoảng mới đặt quyền lợi giai cấp, dân tộc và tăng trưởng vào thế va chạm.
+    </p>
+    <div class="title-buttons title-animate title-animate-delay-5">
+      <button class="btn-pres" id="start-game">Nhận nhiệm vụ</button>
+      <button class="btn-pres muted" id="continue-game">Tiếp tục</button>
+      <button class="btn-pres muted" id="howto-open">Hướng dẫn</button>
+    </div>
+    <button id="title-audio-toggle" class="audio-float" type="button">Âm thanh: Tắt</button>
+    <div class="title-footer">16 QUÝ - 16 KHỦNG HOẢNG - 5 NHÓM LỢI ÍCH - 3 TÀI NGUYÊN QUỐC GIA</div>
+  </section>
+
+  <div id="howto" class="hidden" role="dialog" aria-modal="true" aria-labelledby="howto-title">
+    <div class="howto-card">
+      <h2 id="howto-title">Hướng Dẫn Chơi</h2>
+      <p>Mỗi quý rút 1 thẻ khủng hoảng. Cố vấn sẽ báo cáo tình hình, sau đó bạn chọn 1 trong 3 chính sách.</p>
+      <p>Tán thành của 5 nhóm xã hội thay đổi theo quyết định. Nếu bất kỳ nhóm nào xuống 0, nhiệm kỳ kết thúc bằng cách mạng hoặc đảo chính.</p>
+      <p>Ngân sách dưới -50 gây khủng hoảng tài chính. Ổn định chính trị dưới 20 nghĩa là chính phủ mất kiểm soát.</p>
+      <p>Trụ được hết 16 quý để hoàn thành nhiệm kỳ. Điểm cuối dựa trên mức hài hòa giữa tán thành, ngân sách, ổn định và tăng trưởng.</p>
+      <div class="modal-actions">
+        <button class="btn-pres" id="howto-close">Đã hiểu</button>
+      </div>
+    </div>
+  </div>
+
+  <header id="hud" class="hidden">
+    <div class="hud-time" id="hud-time">NĂM 1 - QUÝ 1</div>
+    <div class="hud-progress" aria-label="Tiến độ nhiệm kỳ">
+      <div class="hud-progress-fill" id="hud-prog" style="width:0%"></div>
+    </div>
+    <div class="hud-stats" id="hud-stats"></div>
+    <div class="hud-controls">
+      <button id="audio-toggle" type="button">Âm thanh: Tắt</button>
+      <button id="save-game" type="button">Lưu</button>
+      <button id="new-game" type="button">Chơi mới</button>
+    </div>
+  </header>
+
+  <main id="game-area" class="hidden">
+    <section id="char-panel" aria-label="Cố vấn chính sách">
+
+      <div id="char-wrapper" class="char-hidden">
+        <div id="char-svg"></div>
+      </div>
+    </section>
+
+    <aside id="dashboard" aria-label="Bảng chỉ số quốc gia">
+      <section>
+        <div class="dash-section-title">Tỷ lệ tán thành</div>
+        <div id="approval-bars"></div>
+      </section>
+      <section>
+        <div class="dash-section-title">Tài nguyên quốc gia</div>
+        <div id="resource-bars"></div>
+      </section>
+      <section id="risk-section">
+        <div class="dash-section-title">Ngưỡng nguy hiểm</div>
+        <div id="risk-list"></div>
+      </section>
+      <section id="history-section">
+        <div class="dash-section-title">Lịch sử quyết định</div>
+        <div id="history-list"></div>
+      </section>
+    </aside>
+
+    <section id="dialogue-box" aria-live="polite">
+      <div class="speaker-line">
+        <div>
+          <div id="speaker-name">Văn phòng Thủ tướng</div>
+          <div id="speaker-title-tag">Phòng tình huống</div>
+        </div>
+      </div>
+      <div id="dialogue-text"></div>
+      <div id="continue-hint" class="hidden">NHẤN ĐỂ TIẾP TỤC</div>
+      <div id="options-panel" class="hidden"></div>
+      <div id="consequence-panel" class="hidden"></div>
+    </section>
+  </main>
+
+  <div id="crisis-reveal" class="hidden"></div>
+  <div id="crisis-ticker"></div>
+  <div id="endscreen" class="hidden"></div>
+  <div id="toast-root" aria-live="polite"></div>
+  <div id="screen-flash" aria-hidden="true"></div>
+
+  <script defer src="js/config.js"></script>
+  <script defer src="js/data/characters.js"></script>
+  <script defer src="js/data/characters.extra.js"></script>
+  <script defer src="js/data/crises.js"></script>
+  <script defer src="js/data/scenes.js"></script>
+  <script defer src="js/data/scenes.anime.js"></script>
+  <script defer src="js/state.js"></script>
+  <script defer src="js/audio.js"></script>
+  <script defer src="js/particles.js"></script>
+  <script defer src="js/ui.js"></script>
+  <script defer src="js/game.js"></script>
+  <script defer src="js/main.js"></script>
+</body>
+</html>

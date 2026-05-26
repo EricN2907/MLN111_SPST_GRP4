@@ -1,0 +1,229 @@
+/* ═══════════════════════════════════════════════════════
+   ANIMATIONS — Keyframes, Transitions, Effects
+   ═══════════════════════════════════════════════════════ */
+
+/* ── SEAL PULSE (Title Screen) ── */
+@keyframes sealPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--gold-dim), inset 0 0 20px var(--gold-dim);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--gold-glow), inset 0 0 40px rgba(201, 150, 26, 0.15);
+  }
+}
+
+/* ── SEAL ROTATE (Title Screen ornament) ── */
+@keyframes sealRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.title-seal-ring {
+  position: absolute;
+  inset: -8px;
+  border: 1px dashed rgba(201, 150, 26, 0.15);
+  border-radius: 50%;
+  animation: sealRotate 30s linear infinite;
+}
+
+/* ── FADE IN ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── FADE OUT ── */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── CARD RISE (crisis card reveal) ── */
+@keyframes cardRise {
+  from {
+    transform: translateY(60px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* ── POP IN (stat delta tags) ── */
+@keyframes popIn {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ── BLINK (continue hint) ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}
+
+/* ── CHARACTER BREATHE ── */
+@keyframes breathe {
+  0%, 100% {
+    transform: scaleY(1) translateY(0);
+  }
+  50% {
+    transform: scaleY(1.012) translateY(-2px);
+  }
+}
+
+#char-svg svg {
+  animation: breathe 3.5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* ── CHARACTER SUBTLE HEAD SWAY ── */
+@keyframes headSway {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(0.3deg); }
+  75%      { transform: rotate(-0.3deg); }
+}
+
+/* ── FIRE PULSE (protest scene) ── */
+@keyframes firePulse {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1; }
+}
+
+/* ── WARNING BLINK (factory scene) ── */
+@keyframes warningBlink {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 1; }
+}
+
+/* ── CLOUD DRIFT (village scene) ── */
+@keyframes cloudDrift {
+  0%   { transform: translateX(-5px); }
+  50%  { transform: translateX(5px); }
+  100% { transform: translateX(-5px); }
+}
+
+/* ── FLOATING NUMBER (stat change) ── */
+.floating-number {
+  position: fixed;
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  pointer-events: none;
+  z-index: 9999;
+  animation: floatUpFade 1.5s var(--ease-spring) forwards;
+}
+
+.float-up {
+  color: var(--green2);
+  text-shadow: 0 0 10px var(--green-glow);
+}
+
+.float-down {
+  color: var(--red2);
+  text-shadow: 0 0 10px var(--red-glow);
+}
+
+@keyframes floatUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.5);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+}
+
+/* ── SCREEN SHAKE ── */
+@keyframes screenShake {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-4px, 2px); }
+  20%  { transform: translate(4px, -2px); }
+  30%  { transform: translate(-3px, 3px); }
+  40%  { transform: translate(3px, -1px); }
+  50%  { transform: translate(-2px, 1px); }
+  60%  { transform: translate(2px, -1px); }
+  70%  { transform: translate(-1px, 1px); }
+  80%  { transform: translate(1px, 0); }
+  90%  { transform: translate(0, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+.screen-shake {
+  animation: screenShake 0.5s ease-out;
+}
+
+/* ── GLOW PULSE (option card hover) ── */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(201, 150, 26, 0);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(201, 150, 26, 0.15);
+  }
+}
+
+/* ── SLIDE IN FROM LEFT ── */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ── SLIDE IN FROM RIGHT ── */
+@keyframes slideInRight {
+  from {
+    transform: translateX(80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ── TITLE SCREEN ENTRANCE ── */
+@keyframes titleFadeUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.title-animate {
+  animation: titleFadeUp 0.8s var(--ease-spring) both;
+}
+
+.title-animate-delay-1 { animation-delay: 0.2s; }
+.title-animate-delay-2 { animation-delay: 0.4s; }
+.title-animate-delay-3 { animation-delay: 0.6s; }
+.title-animate-delay-4 { animation-delay: 0.8s; }
+.title-animate-delay-5 { animation-delay: 1.0s; }
+
+/* ── TYPEWRITER CURSOR ── */
+.type-cursor::after {
+  content: '▎';
+  color: var(--gold);
+  animation: blink 0.8s ease-in-out infinite;
+  margin-left: 1px;
+}

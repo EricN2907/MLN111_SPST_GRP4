@@ -1,0 +1,133 @@
+/* ═══════════════════════════════════════════════════════
+   BASE STYLES — Reset, Typography, Global
+   ═══════════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dim);
+  border-radius: var(--radius-pill);
+}
+
+/* ── SELECTION ── */
+::selection {
+  background: var(--gold-dim);
+  color: var(--gold2);
+}
+
+/* ── TEXT HIGHLIGHTS ── */
+.hl {
+  color: var(--gold2);
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(201, 150, 26, 0.3);
+}
+.hl-bad {
+  color: #ff8a7a;
+  font-weight: bold;
+}
+.hl-good {
+  color: #6ee89a;
+  font-weight: bold;
+}
+
+/* ── HIDDEN UTILITY ── */
+.hidden {
+  display: none !important;
+}
+
+/* ── BUTTONS ── */
+.btn-pres {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  padding: 0.85rem 2.2rem;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold2);
+  cursor: pointer;
+  transition: all var(--dur-normal) var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.btn-pres::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-normal) var(--ease-spring);
+  z-index: -1;
+}
+
+.btn-pres:hover {
+  color: var(--ink);
+  box-shadow: 0 0 20px var(--gold-dim);
+}
+.btn-pres:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-pres:active {
+  transform: scale(0.97);
+}
+
+.btn-pres.danger {
+  border-color: var(--red2);
+  color: var(--red2);
+}
+.btn-pres.danger::before {
+  background: var(--red2);
+}
+.btn-pres.danger:hover {
+  color: white;
+  box-shadow: 0 0 20px var(--red-glow);
+}
+
+/* ── AUDIO TOGGLE ── */
+#audio-toggle {
+  background: none;
+  border: 1px solid var(--cream3);
+  color: var(--cream3);
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--dur-fast);
+  font-family: var(--font-mono);
+}
+#audio-toggle:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+#audio-toggle.active {
+  border-color: var(--gold);
+  color: var(--gold2);
+  background: var(--gold-dim);
+}

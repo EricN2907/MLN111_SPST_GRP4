@@ -1,0 +1,107 @@
+/* ═══════════════════════════════════════════════════════
+   ENDSCREEN — Game Over & Victory
+   ═══════════════════════════════════════════════════════ */
+
+#endscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-xl);
+  animation: fadeIn 0.6s ease;
+}
+
+.endscreen-bg-fail {
+  background: linear-gradient(160deg, #0f0404 0%, #1c0808 40%, #0a0404 100%);
+}
+
+.endscreen-bg-win {
+  background: linear-gradient(160deg, #04080f 0%, #081428 40%, #04080a 100%);
+}
+
+.end-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: var(--sp-sm);
+  animation: titleFadeUp 0.8s var(--ease-spring) both;
+}
+
+.end-subtitle {
+  font-size: 1.2rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--sp-md);
+  animation: titleFadeUp 0.8s var(--ease-spring) 0.2s both;
+}
+
+.end-reason {
+  font-size: 1rem;
+  color: var(--cream2);
+  text-align: center;
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: var(--sp-xl);
+  animation: titleFadeUp 0.8s var(--ease-spring) 0.4s both;
+}
+
+.end-score {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--cream3);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 420px;
+  width: 100%;
+  animation: titleFadeUp 0.8s var(--ease-spring) 0.6s both;
+}
+
+.end-score-label {
+  margin-bottom: var(--sp-sm);
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.end-score-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--ink3);
+}
+
+.end-score-row.total {
+  margin-top: var(--sp-sm);
+  border-color: var(--gold-dim);
+  font-size: 0.95rem;
+}
+
+.end-buttons {
+  display: flex;
+  gap: var(--sp-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: titleFadeUp 0.8s var(--ease-spring) 0.8s both;
+}
+
+/* ── DECORATIVE ELEMENTS ── */
+.endscreen-bg-fail::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(200, 50, 30, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.endscreen-bg-win::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(201, 150, 26, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}

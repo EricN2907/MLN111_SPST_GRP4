@@ -1,0 +1,76 @@
+/* ═══════════════════════════════════════════════════════
+   DESIGN TOKENS — Ghế Quyền Lực
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── INK (Dark backgrounds) ── */
+  --ink:        #0c0e14;
+  --ink2:       #1a1e2a;
+  --ink3:       #252b3a;
+  --ink4:       #303848;
+
+  /* ── GOLD (Primary accent) ── */
+  --gold:       #c9961a;
+  --gold2:      #e8c04a;
+  --gold3:      #f0d878;
+  --gold-dim:   rgba(201, 150, 26, 0.2);
+  --gold-glow:  rgba(201, 150, 26, 0.35);
+
+  /* ── SEMANTIC COLORS ── */
+  --red:        #c0392b;
+  --red2:       #e74c3c;
+  --red-glow:   rgba(231, 76, 60, 0.3);
+  --green:      #27ae60;
+  --green2:     #2ecc71;
+  --green-glow: rgba(46, 204, 113, 0.3);
+  --blue:       #2980b9;
+  --blue2:      #3498db;
+  --purple:     #9b59b6;
+  --purple2:    #c39bd3;
+  --orange:     #f39c12;
+
+  /* ── CREAM (Text / light tones) ── */
+  --cream:      #e8dcc8;
+  --cream2:     #b8a888;
+  --cream3:     #6a5e48;
+
+  /* ── PANEL / GLASS ── */
+  --panel:      rgba(10, 12, 18, 0.88);
+  --panel-solid:rgba(14, 16, 24, 0.95);
+  --glass:      rgba(255, 255, 255, 0.04);
+  --glass2:     rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.08);
+
+  /* ── TYPOGRAPHY ── */
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-body:    'Inter', 'Source Sans 3', system-ui, sans-serif;
+  --font-mono:    'Source Code Pro', 'Consolas', monospace;
+
+  /* ── SPACING ── */
+  --sp-xs: 0.25rem;
+  --sp-sm: 0.5rem;
+  --sp-md: 1rem;
+  --sp-lg: 1.5rem;
+  --sp-xl: 2rem;
+  --sp-2xl: 3rem;
+
+  /* ── SHADOWS ── */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.5);
+  --shadow-gold: 0 0 20px var(--gold-dim), inset 0 0 20px var(--gold-dim);
+
+  /* ── TRANSITIONS ── */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast:    150ms;
+  --dur-normal:  300ms;
+  --dur-slow:    600ms;
+  --dur-scene:   1200ms;
+
+  /* ── BORDER RADIUS ── */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+}
