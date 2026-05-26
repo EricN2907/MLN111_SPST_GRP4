@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/endscreen.css">
   <link rel="stylesheet" href="css/polish.css">
+  <link rel="stylesheet" href="css/audio-settings.css">
 </head>
 <body>
   <div id="bg" class="bg-office" aria-hidden="true"></div>
@@ -47,7 +48,7 @@
       <button class="btn-pres muted" id="continue-game">Tiếp tục</button>
       <button class="btn-pres muted" id="howto-open">Hướng dẫn</button>
     </div>
-    <button id="title-audio-toggle" class="audio-float" type="button">Âm thanh: Tắt</button>
+    <button id="title-audio-toggle" class="audio-float" type="button">Âm thanh & Cài đặt</button>
     <div class="title-footer">16 QUÝ - 16 KHỦNG HOẢNG - 5 NHÓM LỢI ÍCH - 3 TÀI NGUYÊN QUỐC GIA</div>
   </section>
 
@@ -64,6 +65,58 @@
     </div>
   </div>
 
+  <div id="audio-settings-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="audio-settings-title">
+    <div class="settings-card">
+      <h2 id="audio-settings-title">Âm Thanh & Cài Đặt</h2>
+      
+      <div class="settings-group">
+        <label for="audio-mode">Chế độ nhạc nền (BGM)</label>
+        <select id="audio-mode" class="settings-select">
+          <option value="procedural">Procedural Synth (Chạy mượt & Cổ điển)</option>
+          <option value="orchestral">Classical Orchestra (Truyền phát trực tuyến)</option>
+        </select>
+      </div>
+
+      <div class="settings-group">
+        <label for="music-volume">Âm lượng nhạc nền (BGM)</label>
+        <div class="slider-container">
+          <input type="range" id="music-volume" min="0" max="100" value="50">
+          <span id="music-val">50%</span>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label for="sfx-volume">Âm lượng hiệu ứng (SFX)</label>
+        <div class="slider-container">
+          <input type="range" id="sfx-volume" min="0" max="100" value="70">
+          <span id="sfx-val">70%</span>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label>Thử âm thanh (SFX Sound Test)</label>
+        <div class="sound-test-grid">
+          <button type="button" class="btn-test" data-sfx="click">Click</button>
+          <button type="button" class="btn-test" data-sfx="type">Phím Cơ</button>
+          <button type="button" class="btn-test" data-sfx="card">Rút Bài</button>
+          <button type="button" class="btn-test" data-sfx="select">Chọn</button>
+          <button type="button" class="btn-test" data-sfx="positive">Tích cực</button>
+          <button type="button" class="btn-test" data-sfx="negative">Tiêu cực</button>
+          <button type="button" class="btn-test" data-sfx="ending">Chiến thắng</button>
+          <button type="button" class="btn-test" data-sfx="gameover">Thất bại</button>
+        </div>
+      </div>
+
+      <div class="visualizer-wrap">
+        <canvas id="audio-visualizer" width="400" height="48"></canvas>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-pres" id="audio-settings-close">Hoàn tất</button>
+      </div>
+    </div>
+  </div>
+
   <header id="hud" class="hidden">
     <div class="hud-time" id="hud-time">NĂM 1 - QUÝ 1</div>
     <div class="hud-progress" aria-label="Tiến độ nhiệm kỳ">
@@ -71,7 +124,7 @@
     </div>
     <div class="hud-stats" id="hud-stats"></div>
     <div class="hud-controls">
-      <button id="audio-toggle" type="button">Âm thanh: Tắt</button>
+      <button id="audio-toggle" type="button">Âm thanh & Cài đặt</button>
       <button id="save-game" type="button">Lưu</button>
       <button id="new-game" type="button">Chơi mới</button>
     </div>
@@ -123,7 +176,6 @@
   <div id="endscreen" class="hidden"></div>
   <div id="toast-root" aria-live="polite"></div>
   <div id="screen-flash" aria-hidden="true"></div>
-  <audio id="bgm-track" loop src="assets/bgm.mp3" preload="auto"></audio>
 
   <script defer src="js/config.js"></script>
   <script defer src="js/data/characters.js"></script>

@@ -13,7 +13,7 @@ const Game = (() => {
     });
     UI.setContinueEnabled(GameState.hasSave());
     UI.setAudioEnabled(GameAudio.isEnabled());
-    UI.changeScene('office');
+    GameAudio.setScene('title');
   }
 
   function startNewRun() {
@@ -153,6 +153,7 @@ const Game = (() => {
     UI.renderHUD(state);
     UI.applyDeltaAnimations(deltas, state);
     reactToDeltas(deltas);
+    GameAudio.setScene(card.bg || 'office');
 
     pendingEnding = checkGameOver();
     GameState.setPhase('consequence');
@@ -258,6 +259,7 @@ const Game = (() => {
     GameState.setPhase('gameover');
     GameState.save();
     GameAudio.play('negative');
+    GameAudio.setScene('gameover');
     UI.showGameOver(reason, GameState.get(), calcScore());
   }
 
@@ -265,6 +267,7 @@ const Game = (() => {
     GameState.setPhase('victory');
     GameState.save();
     GameAudio.play('ending');
+    GameAudio.setScene('victory');
     UI.showVictory(GameState.get(), calcScore());
   }
 

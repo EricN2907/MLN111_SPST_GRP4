@@ -40,6 +40,9 @@ const UI = (() => {
     if (el) el.classList.add('hidden');
   }
 
+  let visualizerActive = false;
+  let visualizerAnimFrame = null;
+
   function init(callbacks) {
     $('start-game').addEventListener('click', callbacks.onStart);
     $('continue-game').addEventListener('click', callbacks.onContinue);
@@ -47,15 +50,127 @@ const UI = (() => {
     $('howto-close').addEventListener('click', () => hide('howto'));
     $('save-game').addEventListener('click', callbacks.onSave);
     $('new-game').addEventListener('click', callbacks.onNewGame);
-    $('audio-toggle').addEventListener('click', callbacks.onToggleAudio);
-    $('title-audio-toggle').addEventListener('click', callbacks.onToggleAudio);
+
+    // Audio Buttons - Open Settings Modal instead of simple toggle
+    $('audio-toggle').addEventListener('click', () => openAudioSettings());
+    $('title-audio-toggle').addEventListener('click', () => openAudioSettings());
+    $('audio-settings-close').addEventListener('click', () => closeAudioSettings());
+
+    // Volume Sliders & BGM Selector
+    const musicSlider = $('music-volume');
+    const sfxSlider = $('sfx-volume');
+    const audioModeSelect = $('audio-mode');
+
+    musicSlider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      $('music-val').textContent = `${val}%`;
+      GameAudio.setMusicVolume(val);
+    });
+
+    sfxSlider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      $('sfx-val').textContent = `${val}%`;
+      GameAudio.setSfxVolume(val);
+    });
+
+    audioModeSelect.addEventListener('change', (e) => {
+      GameAudio.setAudioMode(e.target.value);
+    });
+
+    // Sound Test Buttons
+    document.querySelectorAll('.btn-test').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const sfx = btn.dataset.sfx;
+        GameAudio.play(sfx);
+      });
+    });
+
+    // Sync initial state
+    syncAudioSettingsUI();
+  }
+
+  function syncAudioSettingsUI() {
+    const volumes = GameAudio.getVolumes();
+    const mode = GameAudio.getAudioMode();
+    const enabled = GameAudio.isEnabled();
+
+    $('music-volume').value = volumes.musicVolume;
+    $('music-val').textContent = `${volumes.musicVolume}%`;
+
+    $('sfx-volume').value = volumes.sfxVolume;
+    $('sfx-val').textContent = `${volumes.sfxVolume}%`;
+
+    $('audio-mode').value = mode;
+
+    $('audio-toggle').classList.toggle('active', enabled);
+    $('title-audio-toggle').classList.toggle('active', enabled);
+  }
+
+  function openAudioSettings() {
+    GameAudio.unlock();
+    if (!GameAudio.isEnabled()) {
+      GameAudio.toggle(); // Turn on by default when clicking setting
+    }
+    syncAudioSettingsUI();
+    show('audio-settings-modal');
+    startVisualizer();
+  }
+
+  function closeAudioSettings() {
+    hide('audio-settings-modal');
+    stopVisualizer();
+  }
+
+  function startVisualizer() {
+    visualizerActive = true;
+    const canvas = $('audio-visualizer');
+    const canvasCtx = canvas.getContext('2d');
+    const analyser = GameAudio.getAnalyser();
+    if (!analyser) return;
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    function draw() {
+      if (!visualizerActive) return;
+      visualizerAnimFrame = requestAnimationFrame(draw);
+
+      analyser.getByteFrequencyData(dataArray);
+
+      // Ink dark translucent bg
+      canvasCtx.fillStyle = 'rgba(12, 14, 20, 0.45)';
+      canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const barWidth = (canvas.width / bufferLength) * 1.5;
+      let barHeight;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        barHeight = (dataArray[i] / 255) * canvas.height * 0.95;
+
+        // Custom golden gradient (from dark gold to brilliant light yellow)
+        const red = 201;
+        const green = 150 + Math.floor(barHeight * 1.25);
+        const blue = 26;
+
+        canvasCtx.fillStyle = `rgb(${red}, ${Math.min(255, green)}, ${blue})`;
+        canvasCtx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
+
+        x += barWidth;
+      }
+    }
+    draw();
+  }
+
+  function stopVisualizer() {
+    visualizerActive = false;
+    if (visualizerAnimFrame) cancelAnimationFrame(visualizerAnimFrame);
   }
 
   function setAudioEnabled(enabled) {
     ['audio-toggle', 'title-audio-toggle'].forEach((id) => {
       const el = $(id);
-      el.textContent = `Âm thanh: ${enabled ? 'Bật' : 'Tắt'}`;
-      el.classList.toggle('active', enabled);
+      if (el) el.classList.toggle('active', enabled);
     });
   }
 
@@ -143,12 +258,10 @@ const UI = (() => {
         <div class="crisis-title">${card.title}</div>
         <div class="crisis-desc">${card.desc}</div>
         <button class="btn-pres" id="start-report">Nghe báo cáo</button>
+      </div>
     `;
     $('start-report').addEventListener('click', onStartReport);
-    
-    // Play crisis sound
     GameAudio.play('crisis');
-    
     show('crisis-reveal');
   }
 
@@ -183,8 +296,9 @@ const UI = (() => {
     let i = 0;
     typeTimer = setInterval(() => {
       if (i < text.length) {
+        const char = text[i];
         el.textContent += text[i++];
-        if (i % 6 === 0) GameAudio.play('type');
+        if (char !== ' ' && i % 2 === 0) GameAudio.play('type');
       } else {
         clearTypewriter();
         el.classList.remove('type-cursor');
@@ -222,10 +336,7 @@ const UI = (() => {
     `).join('');
     panel.querySelectorAll('.opt-card').forEach((button) => {
       button.addEventListener('mouseenter', () => GameAudio.play('hover'));
-      button.addEventListener('click', () => {
-        GameAudio.play('click');
-        onSelect(Number(button.dataset.optionIndex));
-      });
+      button.addEventListener('click', () => onSelect(Number(button.dataset.optionIndex)));
     });
     $('dialogue-text').textContent = 'Thưa Thủ tướng, đây là các phương án chính sách:';
     $('dialogue-box').classList.add('options-mode');
