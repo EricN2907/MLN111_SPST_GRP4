@@ -22,8 +22,17 @@ const GameAudio = (() => {
   function toggle() {
     unlock();
     enabled = !enabled;
-    if (!enabled) stopAmbient();
-    else play('click');
+    const bgm = document.getElementById('bgm-track');
+    if (!enabled) {
+      stopAmbient();
+      if (bgm) bgm.pause();
+    } else {
+      play('click');
+      if (bgm) {
+        bgm.volume = 0.3;
+        bgm.play().catch(() => {});
+      }
+    }
     return enabled;
   }
 
